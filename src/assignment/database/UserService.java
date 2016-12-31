@@ -5,6 +5,7 @@
  */
 package assignment.database;
 
+import assignment.UIs.Admin;
 import static assignment.database.CreateDB.JDBC_URL;
 import static assignment.database.QueryDB.SQL_STATEMENT;
 import assignment.database.models.User;
@@ -71,11 +72,19 @@ public class UserService {
         return new DefaultTableModel(data, columnNames);
 
     }
-    
-    public static ResultSet getAll() throws SQLException{
+
+    public static ResultSet getAll() throws SQLException {
         Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from users");
+        return resultSet;
+    }
+
+    public static ResultSet findUser(String username, String password) throws SQLException {
+        Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from users where username='"+username+"' and password='"+password+"'");
+
         return resultSet;
     }
 }
