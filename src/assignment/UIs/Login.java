@@ -105,6 +105,7 @@ public class Login extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             ResultSet resultSet = UserService.findUser(usernameTxt.getText(), passwordTxt.getText());
+            
             if (resultSet.next()) {
 //            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
@@ -123,7 +124,7 @@ public class Login extends javax.swing.JFrame {
                 moderator.setVisible(true);
                 this.dispose();
             } else {
-                System.out.println("username passwrod incorrect");
+                JOptionPane.showMessageDialog(null, "Invalid user role", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {

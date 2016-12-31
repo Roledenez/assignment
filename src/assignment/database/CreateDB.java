@@ -24,8 +24,8 @@ public class CreateDB {
         connection.createStatement().execute("insert into Users values ('Chamal','Lecturer','lecturer', 'admin'),('Amith','Admin','admin','admin'),('Damith','Moderator','moderator','admin')");
         System.out.println("User database and table created  ...");
         
-        connection.createStatement().execute("create table Students(id varchar(20), name varchar(20),module varchar(20),marks int,grade varchar(20),comments varchar(2000))");
-        connection.createStatement().execute("insert into Students values ('sid_01','Chamara','Maths',45, 'C', 'No comments')");
+        connection.createStatement().execute("create table Students(id varchar(20), name varchar(20),module varchar(20),marks int,grade varchar(20),comments varchar(2000),batchCode varchar(20),description varchar(3000))");
+        connection.createStatement().execute("insert into Students values ('sid_01','Chamara','Maths',45, 'C', 'No comments','b001','no description')");
         System.out.println("Student database and table created  ...");
     }
 }

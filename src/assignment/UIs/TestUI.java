@@ -5,6 +5,7 @@
  */
 package assignment.UIs;
 
+import assignment.database.StudentService;
 import assignment.database.UserService;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,9 @@ public class TestUI extends javax.swing.JFrame {
     public TestUI() {
         initComponents();
         try {
-            testTable.setModel(UserService.buildTableModel(UserService.getAll()));
+//            testTable.setModel(UserService.buildTableModel(UserService.getAll()));
+            testTable.setModel(StudentService.buildTableModel(StudentService.getAll()));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

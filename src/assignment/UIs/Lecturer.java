@@ -37,6 +37,11 @@ public class Lecturer extends javax.swing.JFrame {
         jLabel1.setText("Lecturer Home");
 
         submitBtn.setText("Submit Assignment");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         marksBtn.setText("Submit Marks");
 
@@ -78,6 +83,13 @@ public class Lecturer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        Assignment assignment = new Assignment();
+        assignment.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_submitBtnActionPerformed
 
     /**
      * @param args the command line arguments

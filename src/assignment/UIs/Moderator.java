@@ -5,17 +5,43 @@
  */
 package assignment.UIs;
 
+import assignment.database.StudentService;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Roledene
  */
 public class Moderator extends javax.swing.JFrame {
 
+    DefaultTableModel tableModel = new DefaultTableModel();
+
     /**
      * Creates new form Moderator
      */
     public Moderator() {
         initComponents();
+
+        try {
+            table.setModel(StudentService.buildTableModel(StudentService.getForModerator()));
+        } catch (SQLException ex) {
+            Logger.getLogger(Moderator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        tableModel = (DefaultTableModel) table.getModel();
+
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int i = table.getSelectedRow();
+                System.out.println(tableModel.getValueAt(i, 0));
+            }
+        });
     }
 
     /**
