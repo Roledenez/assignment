@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Moderator extends javax.swing.JFrame {
 
     DefaultTableModel tableModel = new DefaultTableModel();
-
+    int row = 0;
     /**
      * Creates new form Moderator
      */
@@ -39,6 +40,7 @@ public class Moderator extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int i = table.getSelectedRow();
+                row = i;
                 System.out.println(tableModel.getValueAt(i, 0));
             }
         });
@@ -66,8 +68,18 @@ public class Moderator extends javax.swing.JFrame {
         jLabel2.setText("Comments");
 
         submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,6 +141,28 @@ public class Moderator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            if(StudentService.updateComment(commentsTxt.getText(), tableModel.getValueAt(row, 0).toString())){
+                JOptionPane.showMessageDialog(null, "Update successful", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Update failed", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments

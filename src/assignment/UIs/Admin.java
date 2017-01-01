@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Admin extends javax.swing.JFrame {
 
     DefaultTableModel tableModel = new DefaultTableModel();
+    int row = 0;
 
     /**
      * Creates new form Admin
@@ -39,6 +41,7 @@ public class Admin extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int i = table.getSelectedRow();
+                row = i;
                 System.out.println(tableModel.getValueAt(i, 0));
             }
         });
@@ -82,8 +85,18 @@ public class Admin extends javax.swing.JFrame {
         jLabel2.setText("Grade");
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +144,77 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            if(StudentService.updateGrade(gradeTxt.getText(), tableModel.getValueAt(row, 0).toString()) && validateGrade(gradeTxt.getText())){
+                JOptionPane.showMessageDialog(null, "Update successful", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Update failed", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    boolean validateGrade(String grade){
+//        int i = Integer.parseInt(grade);
+        int marks = Integer.parseInt(tableModel.getValueAt(row, 2).toString());
+        if(marks >= 0 && marks < 35){
+            if(grade.equalsIgnoreCase("F")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be F", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else if(marks >= 35 && marks < 45){
+            if(grade.equalsIgnoreCase("D")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be D", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else if(marks >= 45 && marks < 55){
+            if(grade.equalsIgnoreCase("C")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be C", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else if(marks >= 55 && marks < 65){
+            if(grade.equalsIgnoreCase("B")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be B", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else if(marks >= 65 && marks < 75){
+            if(grade.equalsIgnoreCase("A")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be A", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }else if(marks >= 75 && marks <= 100){
+            if(grade.equalsIgnoreCase("A+")){
+                return true;
+            }else{
+                JOptionPane.showMessageDialog(null, "Grade should be A+", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        
+        return false;
+    }
     /**
      * @param args the command line arguments
      */

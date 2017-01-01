@@ -26,6 +26,7 @@ public class CreateDB {
         
         connection.createStatement().execute("create table Students(id varchar(20), name varchar(20),module varchar(20),marks int,grade varchar(20),comments varchar(2000),batchCode varchar(20),description varchar(3000))");
         connection.createStatement().execute("insert into Students values ('sid_01','Chamara','Maths',45, 'C', 'No comments','b001','no description')");
+        connection.createStatement().execute("insert into Students values ('sid_02','Nadun','Maths',98, 'A+', 'No comments','b001','no description')");
         System.out.println("Student database and table created  ...");
     }
 }

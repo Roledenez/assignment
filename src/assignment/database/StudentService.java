@@ -75,9 +75,43 @@ public class StudentService {
         return resultSet;
     }
 
-    public static void update() throws SQLException {
+    public static boolean updateAssignment(String module,String batchCode, String description, String sid) throws SQLException {
         Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("update students set module='m1' where id='s1'");
+        statement.execute("update students set module='"+module+"', batchCode='"+batchCode+"', description='"+description+"' where id='"+sid+"'");
+        if(connection != null) connection.close();
+        if(statement != null) statement.close();
+        return true;
+    }
+    
+    public static boolean updateMarks(String module,String marks, String sid) throws SQLException {
+        Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
+        Statement statement = connection.createStatement();
+        statement.execute("update students set module='"+module+"', marks="+marks+" where id='"+sid+"'");
+        if(connection != null) connection.close();
+        if(statement != null) statement.close();
+        return true;
+        
+    }
+    
+    public static boolean updateGrade(String grade, String sid) throws SQLException {
+        Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
+        Statement statement = connection.createStatement();
+        statement.execute("update students set grade='"+grade+"' where id='"+sid+"'");
+        if(connection != null) connection.close();
+        if(statement != null) statement.close();
+        return true;
+    }
+    
+    public static boolean updateComment(String comments, String sid) throws SQLException {
+        Connection connection = DriverManager.getConnection(CreateDB.JDBC_URL);
+        Statement statement = connection.createStatement();
+        statement.execute("update students set comments='"+comments+"' where id='"+sid+"'");
+        if(connection != null) connection.close();
+        if(statement != null) statement.close();
+        return true;
+    }
+    
+    public static void main(String[] args) throws SQLException{
     }
 }

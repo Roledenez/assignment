@@ -5,6 +5,12 @@
  */
 package assignment.UIs;
 
+import assignment.database.StudentService;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Roledene
@@ -48,8 +54,18 @@ public class Marks extends javax.swing.JFrame {
         jLabel4.setText("Marks");
 
         submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,6 +118,39 @@ public class Marks extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            int marks = Integer.parseInt(marksTxt.getText());
+            
+            if(StudentService.updateMarks(moduleTxt.getText(), marksTxt.getText(),sidTxt.getText()) && validateMarks(marksTxt.getText())){
+                JOptionPane.showMessageDialog(null, "Update successful", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Update failed", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Assignment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        Lecturer l = new Lecturer();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    boolean validateMarks(String marks){
+    
+        int i = Integer.parseInt(marks);
+        
+        if(i >= 0 && i<=100){
+            return true;
+        }else{
+            return false;
+        }        
+    }
     /**
      * @param args the command line arguments
      */

@@ -44,8 +44,18 @@ public class Lecturer extends javax.swing.JFrame {
         });
 
         marksBtn.setText("Submit Marks");
+        marksBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                marksBtnActionPerformed(evt);
+            }
+        });
 
         backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +100,20 @@ public class Lecturer extends javax.swing.JFrame {
         assignment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void marksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marksBtnActionPerformed
+        // TODO add your handling code here:
+        Marks m = new Marks();
+        m.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_marksBtnActionPerformed
 
     /**
      * @param args the command line arguments
