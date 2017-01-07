@@ -149,8 +149,12 @@ public class Admin extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             
-            if(StudentService.updateGrade(gradeTxt.getText(), tableModel.getValueAt(row, 0).toString()) && validateGrade(gradeTxt.getText())){
-                JOptionPane.showMessageDialog(null, "Update successful", "Info", JOptionPane.INFORMATION_MESSAGE);
+            if(validateGrade(gradeTxt.getText())){
+                boolean updateGrade = StudentService.updateGrade(gradeTxt.getText(), tableModel.getValueAt(row, 0).toString());
+                if(updateGrade)
+                    JOptionPane.showMessageDialog(null, "Update successful", "Info", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(null, "Update failed", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Update failed", "Error", JOptionPane.ERROR_MESSAGE);
             }
